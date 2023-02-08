@@ -1,2 +1,2 @@
-#!/bin/basuh
+#!/bin/bash
 ls -l -a
