@@ -1,4 +1,4 @@
-# Installs a Nginx server
+# Installs a Nginx server Williams
 
 exec {'install':
   provider => shell,
