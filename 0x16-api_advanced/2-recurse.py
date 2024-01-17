@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" recursive function that queries the Reddit API """
+""" Recursive function that queries the Reddit API """
 import requests
 import sys
 after = None
@@ -14,20 +14,20 @@ def recurse(subreddit, hot_list=[]):
         a list containing the titles of all hot articles for the subreddit
         or None if queried subreddit is invalid """
     global after
-    headers = {'User-Agent': 'xica369'}
-    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    parameters = {'after': after}
-    response = requests.get(url, headers=headers, allow_redirects=False,
-                            params=parameters)
+    Head = {'User-Agent': 'xica369'}
+    link = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    passed_params = {'after': after}
+    querry_data = requests.get(link, headers=Head, allow_redirects=False,
+                            params=passed_params)
 
-    if response.status_code == 200:
-        next_ = response.json().get('data').get('after')
-        if next_ is not None:
-            after = next_
+    if querry_data.status_code == 200:
+        nxt_d = querry_data.json().get('data').get('after')
+        if nxt_d is not None:
+            after = nxt_d
             recurse(subreddit, hot_list)
-        list_titles = response.json().get('data').get('children')
-        for title_ in list_titles:
-            hot_list.append(title_.get('data').get('title'))
+        title_lst = querry_data.json().get('data').get('children')
+        for title in title_lst:
+            hot_list.append(title.get('data').get('title'))
         return hot_list
     else:
         return (None)
