@@ -4,7 +4,8 @@ import requests
 
 
 def count_words(subreddit, word_list, instances={}, after="", count=0):
-    """Here, we print the counts of given words found in hot posts of a given subreddit.
+    """Here, we print the counts of given words
+    found in hot posts of a given subreddit.
 
     Args:
         subreddit (str): The subreddit to search.
@@ -23,7 +24,7 @@ def count_words(subreddit, word_list, instances={}, after="", count=0):
         "limit": 100
     }
     fetch_data = requests.get(link, headers=Head, params=params,
-                            allow_redirects=False)
+                              allow_redirects=False)
     try:
         results = fetch_data.json()
         if fetch_data.status_code == 404:
@@ -49,7 +50,8 @@ def count_words(subreddit, word_list, instances={}, after="", count=0):
         if len(instances) == 0:
             print("")
             return
-        instances = sorted(instances.items(), key=lambda Keyval: (-Keyval[1], Keyval[0]))
+        instances = sorted(instances.items(),
+                           key=lambda Keyval: (-Keyval[1], Keyval[0]))
         [print("{}: {}".format(numx, numy)) for numx, numy in instances]
     else:
         count_words(subreddit, word_list, instances, after, count)
