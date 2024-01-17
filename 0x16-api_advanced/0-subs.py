@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Queries the Reddit API """
+"""Queries the Reddit API """
 import requests
 import sys
 
@@ -10,9 +10,9 @@ def number_of_subscribers(subreddit):
     Returns:
         number of subscribers to the subreddit,
         or 0 if subreddit requested is invalid"""
-    HD = {'User-Agent': 'xica369'}
-    link = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    response = requests.get(link, headers=HD, allow_redirects=False)
+    headers = {'User-Agent': 'xica369'}
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    response = requests.get(url, headers=headers, allow_redirects=False)
 
     if response.status_code == 200:
         return (response.json().get("data").get("subscribers"))
